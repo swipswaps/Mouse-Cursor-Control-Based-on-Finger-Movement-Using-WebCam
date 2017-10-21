@@ -1,0 +1,76 @@
+# depslib dependency file v1.0
+1507282568 source:c:\mtech\1styear\miniprojects\pre_one_mousecontrol\initializeparameters.cpp
+	<opencv/cv.h>
+	<opencv/cxcore.h>
+	<opencv/highgui.h>
+	<bits/stdc++.h>
+	<opencv2/core/core.hpp>
+	<opencv2/objdetect/objdetect.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/highgui/highgui.hpp>
+
+1508228368 source:c:\mtech\1styear\miniprojects\pre_one_mousecontrol\main.cpp
+	<opencv/cv.h>
+	<opencv/cxcore.h>
+	<opencv/highgui.h>
+	<bits/stdc++.h>
+	<opencv2/core/core.hpp>
+	<opencv2/objdetect/objdetect.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/highgui/highgui.hpp>
+	"InitializeParameters.h"
+	"HandleFingerTip.h"
+	"ControlMouseEvents.h"
+
+1507282574 c:\mtech\1styear\miniprojects\pre_one_mousecontrol\initializeparameters.h
+	<opencv/cv.h>
+	<opencv/cxcore.h>
+	<opencv/highgui.h>
+	<bits/stdc++.h>
+	<opencv2/core/core.hpp>
+	<opencv2/objdetect/objdetect.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/highgui/highgui.hpp>
+
+1508071885 source:c:\mtech\1styear\miniprojects\pre_one_mousecontrol\handlefingertip.cpp
+	<opencv/cv.h>
+	<opencv/cxcore.h>
+	<opencv/highgui.h>
+	<bits/stdc++.h>
+	<opencv2/core/core.hpp>
+	<opencv2/objdetect/objdetect.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/highgui/highgui.hpp>
+
+1508071892 c:\mtech\1styear\miniprojects\pre_one_mousecontrol\handlefingertip.h
+	<opencv/cv.h>
+	<opencv/cxcore.h>
+	<opencv/highgui.h>
+	<bits/stdc++.h>
+	<opencv2/core/core.hpp>
+	<opencv2/objdetect/objdetect.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/highgui/highgui.hpp>
+
+1507888722 c:\mtech\1styear\miniprojects\pre_one_mousecontrol\controlmouseevents.h
+	<opencv/cv.h>
+	<opencv/cxcore.h>
+	<opencv/highgui.h>
+	<bits/stdc++.h>
+	<opencv2/core/core.hpp>
+	<opencv2/objdetect/objdetect.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/highgui/highgui.hpp>
+
+1508228235 source:c:\mtech\1styear\miniprojects\pre_one_mousecontrol\controlmouseevents.cpp
+	<opencv/cv.h>
+	<opencv/cxcore.h>
+	<opencv/highgui.h>
+	<bits/stdc++.h>
+	<opencv2/core/core.hpp>
+	<opencv2/objdetect/objdetect.hpp>
+	<opencv2/imgproc/imgproc.hpp>
+	<opencv2/highgui/highgui.hpp>
+	"windows.h"
+	"HandleFingerTip.h"
+
