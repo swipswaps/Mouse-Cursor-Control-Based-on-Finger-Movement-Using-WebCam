@@ -22,15 +22,19 @@ CvPoint getContourPoint()
    return mainptr;
 }
 
+/*
+@ method [getContour]
+@ description [design the contour on Frame and return no of contour defect]
+*/
 int getContour(IplImage *src, IplImage *threshold_image)
 {
-    CvMemStorage * storage = cvCreateMemStorage();
+    CvMemStorage * memstorage = cvCreateMemStorage();
     CvSeq *contour = NULL;
     CvSeq *maxItem = NULL;
     double area,maxArea=0.0;
     CvSeq *ptr = NULL;
     int counting;
-    int contour_Value = cvFindContours(threshold_image,storage,&contour,sizeof(CvContour),CV_RETR_CCOMP,CV_CHAIN_APPROX_SIMPLE,cvPoint(0,0));
+    int contour_Value = cvFindContours(threshold_image,memstorage,&contour,sizeof(CvContour),CV_RETR_CCOMP,CV_CHAIN_APPROX_SIMPLE,cvPoint(0,0));
 
     if(contour_Value>0)
     {
@@ -47,61 +51,61 @@ int getContour(IplImage *src, IplImage *threshold_image)
         if(maxArea>1000)
         {
             CvPoint np;
-            CvMemStorage *storage1 = cvCreateMemStorage();
-            CvMemStorage *storage2 = cvCreateMemStorage(0);
-            CvSeq *ptseq = cvCreateSeq(CV_SEQ_KIND_GENERIC|CV_32SC2,sizeof(CvContour),sizeof(CvPoint),storage1);
-            CvSeq *hull = NULL;
-            CvSeq *defects = NULL;
+            CvMemStorage *bufferstorage = cvCreateMemStorage();
+            CvMemStorage *defectstorage = cvCreateMemStorage(0);
+            CvSeq *pt_seq = cvCreateSeq(CV_SEQ_KIND_GENERIC|CV_32SC2,sizeof(CvContour),sizeof(CvPoint),bufferstorage);
+            CvSeq *hull_seq = NULL;
+            CvSeq *defects_seq = NULL;
             for(int i=0;i<maxItem->total;i++)
             {
                 CvPoint *p = CV_GET_SEQ_ELEM(CvPoint,maxItem,i);
                 np.x = p->x;
                 np.y = p->y;
-                cvSeqPush(ptseq,&np);
+                cvSeqPush(pt_seq,&np);
             }
-            hull = cvConvexHull2(ptseq,0,CV_CLOCKWISE,0);
-            int hull_count = hull->total;
-            defects = cvConvexityDefects(ptseq,hull,storage2);
+            hull_seq = cvConvexHull2(pt_seq,0,CV_CLOCKWISE,0);
+            int hull_count = hull_seq->total;
+            defects_seq = cvConvexityDefects(pt_seq,hull_seq,defectstorage);
 
-            CvConvexityDefect *defectArray = NULL;
+            CvConvexityDefect *defect_Array = NULL;
             for(int i=1;i<=hull_count;i++)
             {
-                CvPoint pt = **CV_GET_SEQ_ELEM(CvPoint*,hull,i);
+                CvPoint pt = **CV_GET_SEQ_ELEM(CvPoint*,hull_seq,i);
                 cvLine(src,np,pt,CV_RGB(255,0,0),1,CV_AA,0);
                 np = pt;
             }
 
-            for(;defects;defects = defects->h_next)
+            for(;defects_seq;defects_seq = defects_seq->h_next)
             {
-                int def_amount = defects->total;
+                int def_amount = defects_seq->total;
 
                 if(def_amount==0)
                     continue;
 
-                defectArray = (CvConvexityDefect*)malloc(sizeof(CvConvexityDefect)*def_amount);
+                defect_Array = (CvConvexityDefect*)malloc(sizeof(CvConvexityDefect)*def_amount);
 
-                cvCvtSeqToArray(defects,defectArray,CV_WHOLE_SEQ);
+                cvCvtSeqToArray(defects_seq,defect_Array,CV_WHOLE_SEQ);
 
                 counting = 0;
                 for(int i=0;i<def_amount;i++)
                 {
-                    if(defectArray[i].depth>40)
+                    if(defect_Array[i].depth>40)
                     {
                         counting = counting+1;
-                        cvLine(src,*(defectArray[i].start),*(defectArray[i].depth_point),CV_RGB(255,255,0),1,CV_AA,0);
-                        cvCircle(src,*(defectArray[i].depth_point),5,CV_RGB(0,0,255),2,8,0);
-                        cvCircle(src,*(defectArray[i].start),5,CV_RGB(0,255,0),2,8,0);
-                        setContourPoint(*(defectArray[i].start));
-                        cvLine(src,*(defectArray[i].depth_point),*(defectArray[i].end),CV_RGB(0,255,255),1,CV_AA,0);
-                        cvDrawContours(src,defects,CV_RGB(0,0,0),CV_RGB(255,0,0),-1,CV_FILLED,8);
+                        cvLine(src,*(defect_Array[i].start),*(defect_Array[i].depth_point),CV_RGB(255,255,0),1,CV_AA,0);
+                        cvCircle(src,*(defect_Array[i].depth_point),5,CV_RGB(0,0,255),2,8,0);
+                        cvCircle(src,*(defect_Array[i].start),5,CV_RGB(0,255,0),2,8,0);
+                        setContourPoint(*(defect_Array[i].start));
+                        cvLine(src,*(defect_Array[i].depth_point),*(defect_Array[i].end),CV_RGB(0,255,255),1,CV_AA,0);
+                        cvDrawContours(src,defects_seq,CV_RGB(0,0,0),CV_RGB(255,0,0),-1,CV_FILLED,8);
                     }
                 }
-                free(defectArray);
+                free(defect_Array);
 
             }
 
-            cvReleaseMemStorage(&storage1);
-            cvReleaseMemStorage(&storage2);
+            cvReleaseMemStorage(&bufferstorage);
+            cvReleaseMemStorage(&defectstorage);
         }
     }
 

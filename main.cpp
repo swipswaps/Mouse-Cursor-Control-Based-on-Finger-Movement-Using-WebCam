@@ -64,19 +64,19 @@ int main()
         {
             //Moving the Mouse
             controlMousePosition(gray_image);
-            finger = "detecting One";
+            finger = "Motion";
         }
-        else if(counting==2)
+        else if(counting==3)
         {
             //Left Click
             controlLeftClickFeature();
-            finger = "detecting Two";
+            finger = "Left Click!";
         }
         else if(counting==4)
         {
             //Right Click
             controlRightClickFeature();;
-            finger = "detecting Four";
+            finger = "Right Click!";
         }
         else
         {

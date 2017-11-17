@@ -16,11 +16,17 @@ VideoCapture getCameraInstance()
     return capture;
 }
 
+/*
+@ method [createRectangle]
+*/
 void createRectange(Mat img)
 {
     rectangle(img,Point(2,2),Point(302,302),CV_RGB(255,255,255),1,CV_AA,0);
 }
 
+/*
+@ method [createLine]
+*/
 void createLine(Mat img)
 {
     line(img, Point(102,0), Point(102,302),CV_RGB(0,255,0),1, CV_AA, 0 );
