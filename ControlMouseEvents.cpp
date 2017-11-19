@@ -48,63 +48,63 @@ void controlMousePosition(IplImage *img)
    double momentpositiontwo = cvGetSpatialMoment(moments,1,0);
    double momentpositionone = cvGetSpatialMoment(moments,0,1);
    double area = cvGetCentralMoment(moments,0,0);
-   int posX = momentpositiontwo/area;
-   int posY = momentpositionone/area;
+   int  X = momentpositiontwo/area;
+   int  Y = momentpositionone/area;
    int x1,y1;
-   cout<<posX<<" "<<posY<<endl;
+   cout<<X<<" "<<Y<<endl;
    GetCursorPos(&p);
 
    //change position according to matrix
-   if(posX>=60&&posX<120&&posY>=170&&posY<230)
+   if(X>=60&&X<120&&Y>=170&&Y<230)
    {
        x1 = p.x-3;
        y1 = p.y-3;
        SetCursorPos(x1,y1);
        cout<<"top left\n";
    }
-   else if(posX>=120&&posX<190&&posY>=170&&posY<230)
+   else if(X>=120&&X<190&&Y>=170&&Y<230)
    {
        x1 = p.x;
        y1 = p.y-3;
        SetCursorPos(x1,y1);
        cout<<"top middle\n";
    }
-   else if(posX>=190&&posX<270&&posY>=170&&posY<230)
+   else if(X>=190&&X<270&&Y>=170&&Y<230)
    {
        x1 = p.x+3;
        y1 = p.y-3;
        SetCursorPos(x1,y1);
        cout<<"top right\n";
    }
-   else if(posX>=20&&posX<100&&posY>=220&&posY<260)
+   else if(X>=20&&X<100&&Y>=220&&Y<260)
    {
        x1 = p.x-3;
        y1 = p.y;
        SetCursorPos(x1,y1);
        cout<<"middle left\n";
    }
-   else if(posX>=180&&posX<270&&posY>=220&&posY<270)
+   else if(X>=180&&X<270&&Y>=220&&Y<270)
    {
        x1 = p.x+3;
        y1 = p.y;
        SetCursorPos(x1,y1);
        cout<<"middle right\n";
    }
-   else if(posX>=20&&posX<90&&posY>=266&&posY<310)
+   else if(X>=20&&X<90&&Y>=266&&Y<310)
    {
        x1 = p.x-3;
        y1 = p.y+3;
        SetCursorPos(x1,y1);
        cout<<"bottom left\n";
    }
-   else if(posX>=90&&posX<170&posY>=266&&posY<310)
+   else if(X>=90&&X<170&&Y>=266&&Y<310)
    {
        x1 = p.x;
        y1 = p.y+3;
        SetCursorPos(x1,y1);
        cout<<"bottom middle\n";
    }
-   else if(posX>=170&&posX<240&&posY>=266&&posY<310)
+   else if(X>=170&&X<240&&Y>=266&&Y<310)
    {
        x1 = p.x+3;
        y1 = p.y+3;
